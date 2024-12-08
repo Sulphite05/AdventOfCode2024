@@ -3,7 +3,7 @@ def dfs(res, curr, ind, op):
     if ind == n: return res == curr
     if res < curr: return False
     match op:
-        case '*': curr = curr*lst[ind]
+        case '*': curr = curr * lst[ind]
         case '+': curr = curr + lst[ind]
         case '||': curr = int(str(curr)+str(lst[ind]))
     mul = dfs(res, curr, ind+1, '*')
