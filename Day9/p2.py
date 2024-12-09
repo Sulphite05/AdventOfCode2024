@@ -17,20 +17,18 @@ if __name__ == '__main__':
     for i in range(len(block) - 1, -1, -1):
         bl = len(block[i])
         for j, sp in enumerate(space):
-            if j >= i: break
+            if j == i: break
             if sp >= bl:
                 space[i - 1] += bl
                 space[j] -= bl
                 block2[j] += block[i]
-                for _ in range(bl):
-                    block2[i].pop(0)
+                block2[i] = block2[i][bl:]
                 break
     ind = ans = 0
     for b, s in zip(block2, space):
         for num in b:
             ans += num * ind
             ind += 1
-        for _ in range(s):
-            ind += 1
+        ind += s
 
     print(ans)
