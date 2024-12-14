@@ -18,8 +18,8 @@ if __name__ == '__main__':
     for i in range(len(pos)):
         a, b = pos[i][0], pos[i][1]
         x, y = vel[i][0], vel[i][1]
-        x = (((a + x * n) % w) + w) % w
-        y = (((b + y * n) % h) + h) % h
+        x = (a + x * n) % w
+        y = (b + y * n) % h
         pos[i][0], pos[i][1] = x, y
         pos[i] = tuple(pos[i])
 
@@ -45,4 +45,3 @@ if __name__ == '__main__':
 
     ans = one * two * three * four
     print(ans)
-
