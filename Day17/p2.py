@@ -2,7 +2,7 @@ import re
 
 
 def fitness(a, ind):
-    if ind == -1: return a
+    if ind == 0: return a
     for _ in range(8):
         a += 1
         registers['4'] = a
@@ -13,7 +13,7 @@ def fitness(a, ind):
             op = program[i + 1]
             match program[i]:
                 case '0':
-                    registers['4'] *= 2 ** registers[op]
+                    registers['4'] <<= registers[op]
                 case '1':
                     registers['5'] ^= int(op)
                 case '2':
@@ -21,22 +21,18 @@ def fitness(a, ind):
                 case '3':
                     if cont:
                         get = fitness(registers['4'], ind - 1)
-                        if get:
-                            print(a)
-                            return a
+                        if get: return get
                     break
                 case '4':
                     registers['5'] ^= registers['6']
                 case '5':
                     val = registers[op] % 8
-                    if val == int(program[ind]):
-                        cont = True
-                    else:
-                        break
+                    if val == int(program[ind]): cont = True
+                    else: break
                 case '6':
-                    registers['5'] = registers['4'] // 2 ** registers[op]
+                    registers['5'] = registers['4'] >> registers[op]
                 case '7':
-                    registers['6'] = registers['4'] // 2 ** registers[op]
+                    registers['6'] = registers['4'] >> registers[op]
             i += 2
     return None
 
@@ -54,5 +50,4 @@ if __name__ == '__main__':
         fptr.readline()
         program = re.findall('[0-9]+', fptr.readline())
         l = len(program)
-
-        fitness(0, l-1)
+        print(fitness(0, l-1))

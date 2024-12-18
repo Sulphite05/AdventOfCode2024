@@ -30,13 +30,11 @@ if __name__ == '__main__':
                 case '4':
                     registers['5'] ^= registers['6']
                 case '5':
-                    print(registers[op] % 8, registers[op])
                     out.append(registers[op] % 8)
                 case '6':
                     registers['5'] = registers['4'] // 2 ** registers[op]
                 case '7':
                     registers['6'] = registers['4'] // 2 ** registers[op]
-            # print(registers['4'], registers['5'], registers['6'])
             i += 2
 
     print(','.join(map(str, out)))
